@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import validateData from "../utils/validate.js";
 import { firebaseAuth, useFirebase } from "../context/firebase.jsx";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice.js";
 import { loginBgImg } from "../utils/constants.js";
-//TODO: setup state management for user
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,6 +12,7 @@ const Login = () => {
   const password = useRef(null);
   const userName = useRef(null);
   const firebase = useFirebase();
+  const dispatch = useDispatch();
 
   const toggleSignIn = () => {
     setIsSignIn((prevState) => {
@@ -30,6 +32,12 @@ const Login = () => {
           .signUpWithEmailAndPassword({ emailValue, passwordValue })
           .then((val) => {
             const { uid, email } = firebaseAuth.currentUser;
+            //console.log(
+            //`signup successful ${val} dispatchin & redirecting to browse-> ${email}`,
+            //);
+            dispatch(
+              addUser({ uid: uid, email: email, displayName: userNameValue }),
+            );
           })
           .catch((err) => {
             //console.log(`error in signup ${err}`);
@@ -37,6 +45,7 @@ const Login = () => {
           });
       } else {
         //console.log(msg);
+        dispatch(removeUser());
         setErrorMsg(msg);
       }
     } else {
@@ -47,6 +56,12 @@ const Login = () => {
           .loginWithEmailAndPassword({ emailValue, passwordValue })
           .then((val) => {
             const { uid, email } = firebaseAuth.currentUser;
+            //console.log(
+            //`login successful ${val} dispatchin & redirecting to browse-> ${email}`,
+            //);
+            dispatch(
+              addUser({ uid: uid, email: email, displayName: userNameValue }),
+            );
           })
           .catch((err) => {
             setErrorMsg(err.code);
@@ -54,6 +69,7 @@ const Login = () => {
           });
       } else {
         //console.log(msg);
+        dispatch(removeUser());
         setErrorMsg(msg);
       }
     }
