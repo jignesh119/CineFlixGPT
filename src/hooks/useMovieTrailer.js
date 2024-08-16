@@ -18,7 +18,6 @@ const useMovieTrailer = (movieID) => {
         );
         const trailerData = filteredData ? filteredData[0] : json.results[0];
         dispatch(addTrailerVideo(trailerData));
-        console.log("trailer: ", trailerData);
       })
       .catch((err) => console.error("error:" + err));
   };

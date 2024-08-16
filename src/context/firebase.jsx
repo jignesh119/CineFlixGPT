@@ -34,7 +34,6 @@ export const useFirebase = () => useContext(FireBaseContext);
 
 export const FirebaseProvider = (props) => {
   const signUpWithEmailAndPassword = ({ emailValue, passwordValue }) => {
-    console.log(`attempting to signup in firebase.jsx: `);
     return createUserWithEmailAndPassword(
       firebaseAuth,
       emailValue,
@@ -44,11 +43,9 @@ export const FirebaseProvider = (props) => {
   //const putData = (key, data) => set(ref(database, key), data);
   //{EMAILVALUE MUST BE SAME NAME WHEN BEING PAASD IN LOGIN.JSX}
   const loginWithEmailAndPassword = ({ emailValue, passwordValue }) => {
-    console.log(`attempting to login in firebase.jsx: `);
     return signInWithEmailAndPassword(firebaseAuth, emailValue, passwordValue);
   };
   const signUpWithGoogle = () => {
-    console.log(`attempting to google signUp in firebase.jsx: `);
     return signInWithPopup(firebaseAuth, googleProvider);
   };
   const onAuthStateChange = (callback) => {

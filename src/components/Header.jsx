@@ -29,10 +29,8 @@ const Header = () => {
       if (user) {
         const { uid, email, displayName } = firebaseAuth.currentUser;
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
-        //console.log(`usr loggedin dispatchinge addUser ${user} `);
         navigate("/browse");
       } else {
-        //console.log(`usr loggedout dispatching removeUser`);
         dispatch(removeUser());
         navigate("/login");
       }

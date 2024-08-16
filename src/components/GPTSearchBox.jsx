@@ -13,21 +13,17 @@ const GPTSearchBox = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`query is ${query}`);
     (async () => {
       const res = await getGroqCompletion(
         `give me response in form of only names of movies as a ; seperated values for this query '${query}'? if the query is insufficient or inappropriate then only give me 'not found' as response. dont include any other text in the reponse except for ; seperated movie names or 'not found'`,
       );
       const response = res?.choices[0]?.message?.content;
-      console.log(`response from groq in gptsearch `, JSON.stringify(response));
       if (response === "not found") setMovies([]);
       else {
         setMovies(response.split(";"));
         const promiseArray = movies.map((movie) => searchMovieTMDB(movie));
 
         const tmdbResults = await Promise.all(promiseArray);
-
-        console.log("tmdbResults", tmdbResults);
 
         dispatch(
           addGptMovieResult({

@@ -12,7 +12,6 @@ const useUpcomingMovies = () => {
     fetch(url, tmdbApiOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Api upcoming data: ", data.results);
         //adding Popularmovies data to moviesSlice store
         dispatch(addUpcomingMovies(data.results));
       })
@@ -20,7 +19,6 @@ const useUpcomingMovies = () => {
   };
   useEffect(() => {
     getUpcomingMovies();
-    //console.log("topRated movies in store @ usePopularMovies", upcomingMovies);
   }, []);
 };
 

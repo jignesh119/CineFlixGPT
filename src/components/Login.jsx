@@ -27,48 +27,36 @@ const Login = () => {
     if (!isSignIn) {
       //signup
       if (!msg) {
-        //console.log(`signingUp with ${emailValue} ${passwordValue}`);
         firebase
           .signUpWithEmailAndPassword({ emailValue, passwordValue })
           .then((val) => {
             const { uid, email } = firebaseAuth.currentUser;
-            //console.log(
-            //`signup successful ${val} dispatchin & redirecting to browse-> ${email}`,
-            //);
             dispatch(
               addUser({ uid: uid, email: email, displayName: userNameValue }),
             );
           })
           .catch((err) => {
-            //console.log(`error in signup ${err}`);
             setErrorMsg(err.code);
           });
       } else {
-        //console.log(msg);
         dispatch(removeUser());
         setErrorMsg(msg);
       }
     } else {
       //signin
       if (!msg) {
-        //console.log(`logging with ${emailValue} ${passwordValue}`);
         firebase
           .loginWithEmailAndPassword({ emailValue, passwordValue })
           .then((val) => {
             const { uid, email } = firebaseAuth.currentUser;
-            //console.log(
-            //`login successful ${val} dispatchin & redirecting to browse-> ${email}`,
-            //);
             dispatch(
               addUser({ uid: uid, email: email, displayName: userNameValue }),
             );
           })
           .catch((err) => {
             setErrorMsg(err.code);
-            //console.log(`error in login ${err}`);
           });
       } else {
-        //console.log(msg);
         dispatch(removeUser());
         setErrorMsg(msg);
       }

@@ -12,7 +12,6 @@ const useNowPlayingMovies = () => {
     fetch(url, tmdbApiOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Api nowPlayingData: ", data.results);
         //adding movies data to moviesSlice store
         dispatch(addNowPlayingMovies(data.results));
       })
@@ -20,7 +19,6 @@ const useNowPlayingMovies = () => {
   };
   useEffect(() => {
     getNowPlayingMovies();
-    console.log("movies from store ", movies);
   }, []);
 };
 

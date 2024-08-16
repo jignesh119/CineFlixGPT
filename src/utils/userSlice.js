@@ -7,7 +7,6 @@ const userSlice = createSlice({
   },
   reducers: {
     addUser: (state, action) => {
-      console.log(`returning ${JSON.stringify(action.payload)}`);
       state.user = action.payload;
       //return action.payload; //.payload=what we pass during dispatch(addUser(PAYLOAD))
     },

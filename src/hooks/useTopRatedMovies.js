@@ -12,7 +12,6 @@ const useTopRatedMovies = () => {
     fetch(url, tmdbApiOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Api topRated data: ", data.results);
         //adding Popularmovies data to moviesSlice store
         dispatch(addTopRatedMovies(data.results));
       })
@@ -20,7 +19,6 @@ const useTopRatedMovies = () => {
   };
   useEffect(() => {
     getTopRatedMovies();
-    //console.log("topRated movies in store @ usePopularMovies", topRatedMovies);
   }, []);
 };
 

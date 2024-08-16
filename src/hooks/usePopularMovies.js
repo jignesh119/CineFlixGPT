@@ -12,7 +12,6 @@ const usePopularMovies = () => {
     fetch(url, tmdbApiOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Api popular data: ", data.results);
         //adding Popularmovies data to moviesSlice store
         dispatch(addPopularMovies(data.results));
       })
@@ -20,7 +19,6 @@ const usePopularMovies = () => {
   };
   useEffect(() => {
     getPopularMovies();
-    //console.log("Popular movies in store @ usePopularMovies", movies);
   }, []);
 };
 
